@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 
-export function FormComponent() {
-  const [value, setValue] = useState("");
+type Props = {
+  initialValue: string;
+  onSave: (value: string) => void;
+};
 
-  const handleChange = (event) => {
+export function FormComponent({ initialValue, onSave }: Props) {
+  const [value, setValue] = useState(initialValue);
+
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
-
   return (
-    <input type="text" value={value} onChange={handleChange} />
+    <>
+     <input type="text" value={value} onChange={handleChange} />
+    </>
+   
   );
 }
