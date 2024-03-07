@@ -5,15 +5,19 @@ type MenuIds = "first" | "second" | "last";
 type Menu = { id: MenuIds; title: string };
 
 type SelectedMenu = {
-  id?: MenuIds;
+  id: MenuIds;
 };
 
 type MenuAction = {
   onSelectedMenu: (menu: SelectedMenu) => void;
 };
 
+// const MenuSelectedContext = createContext<SelectedMenu>({
+//   selectedMenu: {} as SelectedMenu,
+// })
+
 const MenuSelectedContext = createContext<SelectedMenu>({
-  id: undefined,
+  id: "first",
 });
 
 const MenuActionContext = createContext<MenuAction>({
@@ -25,7 +29,11 @@ type PropsProvider = {
 };
 
 function MenuProvider({ children }: PropsProvider) {
-  const [selectedMenu, setSelectedMenu] = useState<SelectedMenu>({});
+  // const [selectedMenu, setSelectedMenu] = useState<SelectedMenu>({} as SelectedMenu);
+
+  const [selectedMenu, setSelectedMenu] = useState<SelectedMenu>({
+    id: "first",
+  });
 
   const menuContextAction = useMemo(
     () => ({
